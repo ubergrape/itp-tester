@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect
+from flask import Flask, Response, request, redirect
 
 app = Flask(__name__)
 
@@ -8,5 +8,16 @@ def hello_world():
     redirect_to = redirect(to, code=302)
     response = app.make_response(redirect_to)
     response.set_cookie('tracking_id', value='314159265359')
+
+    return response
+
+
+
+@app.route('/test')
+def test():
+    cookie = request.cookies.get("tracking_id")
+
+    text = "tracking_id=%s" % cookie
+    response = Response(response=text)
 
     return response
