@@ -9,7 +9,7 @@ def hello_world():
     to = request.args.get('to')
     redirect_to = redirect(to, code=302)
     response = app.make_response(redirect_to)
-    response.set_cookie('tracking_id', value=datetime.utcnow())
+    response.set_cookie('tracking_id', value=str(datetime.utcnow()))
 
     return response
 
